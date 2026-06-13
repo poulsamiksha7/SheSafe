@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SheSafe</title>
+</head>
+<body>
+    <h1>SheSafe🛡️</h1>
+    <h3>Recent Safety Reports</h3>
+
+    {% for report in reports %}
+        <div style="border: 1px solid #ccc; margin: 10px; padding: 10px;">
+            <h4>{{ report.area }}</h4>
+            <p>Category: {{ report.category }}</p>
+            <p>Rating: {{ report.rating }}/5</p>
+            <p>{{ report.description }}</p>
+        </div>
+    {% empty %}
+        <p>No reports yet.</p>
+    {% endfor %}
+</body>
+</html>

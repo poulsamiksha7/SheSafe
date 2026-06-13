@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import SafetyReport
 # Create your views here.
 def home(request):
-    return HttpResponse("SheSafe is Alive")
+    reports=SafetyReport.objects.all()
+    return render(request,'reports/home.html',{'reports':reports})
 def about(request):
-    return HttpResponse("SheSafe About")
+    return HttpResponse("Built By Samiksha Poul")
