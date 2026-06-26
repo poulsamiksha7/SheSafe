@@ -24,4 +24,6 @@ urlpatterns = [
     path('about/',views.about, name='about'),
     path('add/', views.add_report, name='add_report'),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('areas',views.area_list, name='area_list'),
+    path('areas/<str:area_name>/',views.area_detail,name='area_detail'),
 ]

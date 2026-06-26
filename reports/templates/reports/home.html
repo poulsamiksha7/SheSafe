@@ -14,6 +14,7 @@
     {% else %}
         <p><a href="{% url 'login' %}">Login</a></p>
     {% endif %}
+    <p><a href="{% url 'area_list' %}">View All Areas</a></p>
     <h3>Recent Safety Reports</h3>
 
     {% for report in reports %}

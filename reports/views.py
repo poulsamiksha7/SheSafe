@@ -4,6 +4,7 @@ from .forms import SafetyReportForm
 from django.http import HttpResponse
 from .models import SafetyReport
 from django.shortcuts import render, redirect
+from django.db.models import Avg
 # Create your views here.
 def home(request):
     reports=SafetyReport.objects.all()
@@ -21,3 +22,16 @@ def add_report(request):
     else:
         form =SafetyReportForm()
     return render(request,'reports/add_report.html',{'form':form})
+
+def area_list(request):
+    areas=SafetyReport.objects.values('area').annotate(avg_rating=Avg('rating')).order_by('area')
+    return render(request, 'reports/area_list.html',{'areas':areas})
+
+def area_detail(request,area_name):
+    reports=SafetyReport.objects.filter(area=area_name)
+    avg=reports.aggregate(Avg('rating'))['rating__avg']
+    return render(request,'reports/area_detail.html',{
+        'area_name':area_name,
+        'reports':reports,
+        'avg_rating': avg,
+    })
