@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Areas - She Safe</title>
-</head>
-<body>
+{% extends 'reports/base.html' %}
+{% block content %}
     <h2>All Areas</h2>
     {% for area in areas %}
-        <p>
+        <div class="card mb-2 p-3">
             <a href="{% url 'area_detail' area.area %}">{{ area.area }}</a>- Average Rating: {{ area.avg_rating|floatformat:1 }}/5
-        </p>
+        </div>
     {% endfor %}
-    <p><a href="{% url 'home' %}">Back to home</a></p>
-</body>
-</html>
+{% endblock %}

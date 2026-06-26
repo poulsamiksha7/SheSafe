@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login - SheSafe</title>
-</head>
-<body>
+{% extends 'reports/base.html' %}
+{% block content %}
     <h2>Login to SheSafe 🛡️</h2>
-
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Login</button>
+        <button type="submit" class="btn btn-primary">Login</button>
     </form>
-</body>
-</html>
+{% endblock %}

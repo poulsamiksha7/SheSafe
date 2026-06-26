@@ -1,31 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>SheSafe</title>
-</head>
-<body>
-    <h1>SheSafe🛡️</h1>
-    {% if user.is_authenticated %}
-        <p>Welcome, {{user.username }}</p>
-        <form method="post" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <button type="submit">Logout</button>
-        </form>
-    {% else %}
-        <p><a href="{% url 'login' %}">Login</a></p>
-    {% endif %}
-    <p><a href="{% url 'area_list' %}">View All Areas</a></p>
+{% extends 'reports/base.html' %}
+{% block content %}
     <h3>Recent Safety Reports</h3>
-
     {% for report in reports %}
-        <div style="border: 1px solid #ccc; margin: 10px; padding: 10px;">
-            <h4>{{ report.area }}</h4>
-            <p>Category: {{ report.category }}</p>
-            <p>Rating: {{ report.rating }}/5</p>
-            <p>{{ report.description }}</p>
+        <div class="card mb-2 p-3">
+            <h5>{{ report.area }}</h5>
+            <p class="mb-1">Category: {{ report.category }} | Rating: {{ report.rating }}/5</p>
+            <p class="mb-0">{{ report.description }}</p>
         </div>
     {% empty %}
-        <p>No reports yet.</p>
+        <p>No reports Yet.</p>
     {% endfor %}
-</body>
-</html>
+{% endblock %}

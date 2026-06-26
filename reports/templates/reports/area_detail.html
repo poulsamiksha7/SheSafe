@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>{{ area_name }} - SheSafe </title>
-</head>
-<body>
+{% extends 'reports/base.html' %}
+{% block content %}
     <h2>{{ area_name }}</h2>
     <p>Average Rating: {{ avg_rating|floatformat:1 }}/5</p>
 
@@ -15,6 +11,4 @@
         </div>
     {% endfor %}
     <p><a href="{% url 'area_list' %}">Back to all areas</a></p>
-    
-</body>
-</html>
+{% endblock %}
