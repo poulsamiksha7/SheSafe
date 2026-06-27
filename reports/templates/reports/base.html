@@ -11,6 +11,7 @@
             <a href="{% url 'area_list' %}" class="btn btn-outline-light btn-sm">Areas</a>
             {% if user.is_authenticated %}
                 <a href="{% url 'add_report' %}" class="btn btn-outline-light btn-sm">Add Report</a>
+                <a href="{% url 'my_reports' %}" class="btn btn-outline-light btn-sm">My Reports</a>
                 <span class="text-white mx-2">Hi, {{ user.username }}</span>
                 <form action="{% url 'logout' %}" method="post" style="display: inline;">
                     {% csrf_token %}

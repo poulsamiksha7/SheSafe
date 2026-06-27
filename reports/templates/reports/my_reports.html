@@ -1,0 +1,15 @@
+{% extends 'reports/base.html' %}
+{% block content %}
+    <h2>My reports</h2>
+    {% for report in reports %}
+        <div class="card mb-2 p-3">
+            <h5>{{ report.locality }}, {{report.city }}</h5>
+            <p class="mb-1">Category: {{report.category }} | Rating: {{ report.rating }}/5</p>
+            <p>{{ report.description }}</p>
+            <a href="{% url 'edit_report' report.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
+            <a href="{% url 'delete_report' report.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+        </div>
+    {% empty %}
+        <p>You haven't submitted any reports yet.</p>
+    {% endfor %}
+{% endblock %}

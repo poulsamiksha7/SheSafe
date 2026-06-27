@@ -1,12 +1,7 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
-class SafetyReport(models.Model):
-    area=models.CharField(max_length=100)
-    category=models.CharField(max_length=50)
-    rating=models.IntegerField()
-    description=models.TextField()
-    created_at=models.DateTimeField(auto_now_add=True)
+
 MAHARASHTRA_CITIES=[
     ('Pune','Pune'),
     ('Mumbai','Mumbai'),
@@ -25,7 +20,8 @@ CATEGORY_CHOICES=[
 ]
 
 class SafetyReport(models.Model):
-    city=models.CharField(max_length=50,choices=MAHARASHTRA_CITIES,default='Pune')
+    user=models.ForeignKey(User,on_delete=models.CASCADE,null=True,blank=True)
+    city=models.CharField(max_length=50,choices=MAHARASHTRA_CITIES, default='Pune')
     locality=models.CharField(max_length=100,help_text='e.g. Wagholi, Kharadi, Hinjewadi')
     category=models.CharField(max_length=50,choices=CATEGORY_CHOICES)
     rating=models.IntegerField()
