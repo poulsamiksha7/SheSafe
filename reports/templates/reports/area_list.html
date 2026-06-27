@@ -3,7 +3,7 @@
     <h2>All Areas</h2>
     {% for area in areas %}
         <div class="card mb-2 p-3">
-            <a href="{% url 'area_detail' area.area %}">{{ area.area }}</a>- Average Rating: {{ area.avg_rating|floatformat:1 }}/5
+            <a href="{% url 'area_detail' area.city %}">{{ area.city }}</a>- Average Rating: {{ area.avg_rating|floatformat:1 }}/5
         </div>
     {% endfor %}
 {% endblock %}

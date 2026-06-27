@@ -24,14 +24,14 @@ def add_report(request):
     return render(request,'reports/add_report.html',{'form':form})
 
 def area_list(request):
-    areas=SafetyReport.objects.values('area').annotate(avg_rating=Avg('rating')).order_by('area')
-    return render(request, 'reports/area_list.html',{'areas':areas})
+    areas=SafetyReport.objects.values('city').annotate(avg_rating=Avg('rating')).order_by('city')
+    return render(request,'reports/area_list.html',{'areas':areas})
 
-def area_detail(request,area_name):
-    reports=SafetyReport.objects.filter(area=area_name)
+def area_detail(request,city_name):
+    reports=SafetyReport.objects.filter(city=city_name)
     avg=reports.aggregate(Avg('rating'))['rating__avg']
     return render(request,'reports/area_detail.html',{
-        'area_name':area_name,
+        'city_name':city_name,
         'reports':reports,
-        'avg_rating': avg,
+        'avg_rating':avg,
     })
