@@ -7,6 +7,7 @@ from django.db.models import Avg
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import SafetyReportSearlizer
+
 # Create your views here.
 def home(request):
     reports=SafetyReport.objects.all()
@@ -83,3 +84,11 @@ def api_add_report(request):
         serializer.save()
         return Response(serializer.data,status=201)
     return Response(serializer.errors,status=400)
+ 
+@login_required
+def delete_report(request,report_id):
+    report=get_object_or_404(SafetyReport,id=report_id,user=request.user)
+    if request.method=='POST':
+        report.delete()
+        return redirect('my_reports')
+    return render(request,'reports/confirm_delete.html',{'report':report})
