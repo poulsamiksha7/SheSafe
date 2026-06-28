@@ -7,7 +7,7 @@ from django.db.models import Avg
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import SafetyReportSearlizer
-
+from .ai_summary import generate_area_summary
 # Create your views here.
 def home(request):
     reports=SafetyReport.objects.all()
@@ -92,3 +92,15 @@ def delete_report(request,report_id):
         report.delete()
         return redirect('my_reports')
     return render(request,'reports/confirm_delete.html',{'report':report})
+
+def area_detail(request,city_name):
+    reports=SafetyReport.objects.filter(city=city_name)
+    avg=reports.aggregate(Avg('rating'))['rating__avg']
+    ai_summary=generate_area_summary(city_name,reports)
+    return render(request,'reports/area_detail.html',
+                  {
+                      'city_name':city_name,
+                      'reports':reports,
+                      'avg_rating':avg,
+                      'ai_summary':ai_summary,
+                  })

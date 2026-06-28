@@ -9,6 +9,10 @@
             <p>Rating: {{report.rating }}/5</p>
             <p>{{ report.description }}</p>
         </div>
+        <div class="card mb-3 p-3 bg-light">
+            <h5>AI Safety Summary</h5>
+            <p style="white-space: pre-line;">{{ ai_summary }}</p>
+        </div>
     {% endfor %}
     <p><a href="{% url 'area_list' %}">Back to all areas</a></p>
 {% endblock %}
